@@ -98,14 +98,13 @@
          * @returns {String|Number}
          */
         function getComputedStyle(element, prop) {
-            if (element.currentStyle) {
+           if (element.currentStyle) {
                 return element.currentStyle[prop];
-            }
-            if (window.getComputedStyle) {
+            } else if (window.getComputedStyle && window.getComputedStyle(element, null)) {
                 return window.getComputedStyle(element, null).getPropertyValue(prop);
+            } else {
+                return element.style[prop];
             }
-
-            return element.style[prop];
         }
 
         /**
